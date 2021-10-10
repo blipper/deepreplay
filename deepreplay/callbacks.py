@@ -109,6 +109,8 @@ class ReplayData(Callback):
             metric_name = metric
             if callable(metric):
                 metric_name = metric.name if hasattr(metric, 'name') else metric.__name__
+            else:
+                metric_name = metric.__name__
             print(metric_name)
             self.group.create_dataset(metric_name, shape=(self.n_epochs,), dtype='f')
 
