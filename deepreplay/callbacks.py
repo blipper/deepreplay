@@ -107,7 +107,7 @@ class ReplayData(Callback):
         self.group.create_dataset('loss', shape=(self.n_epochs,), dtype='f')
         print(self.model.metrics)
         for metric in self.model.metrics:
-            metric_name = str(metric_name)
+            metric_name = str(metric)
             if callable(metric):
                 metric_name = metric.name if hasattr(metric, 'name') else metric.__name__
             print(metric_name)
