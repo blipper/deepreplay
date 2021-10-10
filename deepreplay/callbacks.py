@@ -105,7 +105,6 @@ class ReplayData(Callback):
         self.group.create_dataset('targets', data=self.targets)
 
         self.group.create_dataset('loss', shape=(self.n_epochs,), dtype='f')
-        print(self.model.metrics)
         for metric in self.model.metrics:
             metric_name = str(metric)            
             if callable(metric):
