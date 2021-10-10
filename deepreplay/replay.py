@@ -131,7 +131,7 @@ class Replay(object):
         # Keras function to get the loss and metrics, given inputs, targets, weights and sample weights
         self._get_metrics = K.function(inputs=[K.learning_phase()] + self.model.inputs + self.model.targets +
                                               self._model_weights + self.model.sample_weights,
-                                       outputs=[self.model.total_loss] + self.model.metrics)
+                                       outputs=[self.model.total_loss] + self.model.metrics_tensors)
         # Keras function to compute the binary cross entropy, given inputs, targets, weights and sample weights
         self._get_binary_crossentropy = K.function(inputs=[K.learning_phase()] + self.model.inputs +
                                                           self.model.targets + self._model_weights +
