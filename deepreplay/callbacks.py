@@ -107,11 +107,9 @@ class ReplayData(Callback):
         self.group.create_dataset('loss', shape=(self.n_epochs,), dtype='f')
         print(self.model.metrics)
         for metric in self.model.metrics:
-            metric_name = str(metric)
             if callable(metric):
                 metric_name = metric.name if hasattr(metric, 'name') else metric.__name__
-            print(metric_name)
-            self.group.create_dataset(metric_name, shape=(self.n_epochs,), dtype='f')
+            self.group.create_dataset("metric_"+metric_name, shape=(self.n_epochs,), dtype='f')
 
         self.group.create_dataset('lr', shape=(self.n_epochs,), dtype='f')
 
@@ -138,8 +136,8 @@ class ReplayData(Callback):
         self._append_weights()
         self.group['loss'][epoch] = logs.get('loss')
         for metric in self.model.metrics:
-            metric_name = type(metric).__name__
+            metric_name = str(metric_
             if callable(metric):
                 metric_name = metric.name if hasattr(metric, 'name') else metric.__name__
-            self.group[metric_name][epoch] = logs.get(metric_name, np.nan)
+            self.group["metric_"+metric_name][epoch] = logs.get(metric_name, np.nan)
         return
