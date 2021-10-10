@@ -136,7 +136,7 @@ class ReplayData(Callback):
         self._append_weights()
         self.group['loss'][epoch] = logs.get('loss')
         for metric in self.model.metrics:
-            metric_name = str(metric_
+            metric_name = str(metric)
             if callable(metric):
                 metric_name = metric.name if hasattr(metric, 'name') else metric.__name__
             self.group["metric_"+metric_name][epoch] = logs.get(metric_name, np.nan)
