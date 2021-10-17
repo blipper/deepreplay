@@ -83,7 +83,7 @@ class ReplayData(Callback):
         self.n_epochs = self.params['epochs']
 
         self.group = self.handler.create_group(self.group_name)
-        self.group.attrs['samples'] = self.params['samples']
+        self.group.attrs['samples'] = len(self.inputs)
         self.group.attrs['batch_size'] = self.params['batch_size']
         self.group.attrs['n_batches'] = (self.params['samples'] + self.params['batch_size'] - 1) // \
                                         self.params['batch_size']
