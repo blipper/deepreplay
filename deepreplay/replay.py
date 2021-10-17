@@ -129,15 +129,14 @@ class Replay(object):
         self._get_output = K.function(inputs=[K.learning_phase()] + self.model.inputs + self._model_weights,
                                       outputs=[self.model.layers[-1].output])
         # Keras function to get the loss and metrics, given inputs, targets, weights and sample weights
-        self._get_metrics = K.function(inputs=[K.learning_phase()] + self.model.inputs + self.model.targets +
+        self._get_metrics = K.function(inputs=[K.learning_phase()] + self.model.inputs +
                                               self._model_weights + self.model.sample_weights,
                                        outputs=[self.model.total_loss] + self.model.metrics_tensors)
         # Keras function to compute the binary cross entropy, given inputs, targets, weights and sample weights
         self._get_binary_crossentropy = K.function(inputs=[K.learning_phase()] + self.model.inputs +
-                                                          self.model.targets + self._model_weights +
+                                                           self._model_weights +
                                                           self.model.sample_weights,
-                                                   outputs=[K.binary_crossentropy(self.model.targets[0],
-                                                                                  self.model.outputs[0])])
+                                                   outputs=[K.binary_crossentropy(self.model.outputs[0])])
 
         # Keras function to compute the gradients for trainable weights, given inputs, targets, weights and
         # sample weights
@@ -145,7 +144,7 @@ class Replay(object):
                                     for w in layer.trainable_weights
                                     if layer.trainable and ('bias' not in w.op.name)]
         self.__trainable_gradients = self.model.optimizer.get_gradients(self.model.total_loss, self.__trainable_weights)
-        self._get_gradients = K.function(inputs=[K.learning_phase()] + self.model.inputs + self.model.targets +
+        self._get_gradients = K.function(inputs=[K.learning_phase()] + self.model.inputs +
                                                 self._model_weights + self.model.sample_weights,
                                          outputs=self.__trainable_gradients)
 
