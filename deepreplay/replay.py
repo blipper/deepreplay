@@ -133,10 +133,10 @@ class Replay(object):
                                               self._model_weights + self.model.sample_weights,
                                        outputs=[self.model.total_loss] + self.model.metrics)
         # Keras function to compute the binary cross entropy, given inputs, targets, weights and sample weights
-        self._get_binary_crossentropy = K.function(inputs=[K.learning_phase()] + self.model.inputs +
-                                                           self._model_weights +
-                                                          self.model.sample_weights,
-                                                   outputs=[K.binary_crossentropy(self.model.outputs[0])])
+        #self._get_binary_crossentropy = K.function(inputs=[K.learning_phase()] + self.model.inputs +
+        #                                                   self._model_weights +
+        #                                                  self.model.sample_weights,
+        #                                           outputs=[K.binary_crossentropy(self.model.outputs[0])])
 
         # Keras function to compute the gradients for trainable weights, given inputs, targets, weights and
         # sample weights
