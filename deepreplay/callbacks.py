@@ -2,8 +2,8 @@ from __future__ import division
 import os
 import numpy as np
 import h5py
-import keras.backend as K
-from keras.callbacks import Callback
+import tensorflow.compat.v1.keras.backend as K
+from tensorflow.compat.v1.keras.callbacks import Callback
 
 class ReplayData(Callback):
     """Creates an instance of a Keras Callback to collect information
