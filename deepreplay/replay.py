@@ -2,6 +2,7 @@ from __future__ import division
 import numpy as np
 import h5py
 import tensorflow.compat.v1.keras.backend as K
+import tensorflow
 from tensorflow.compat.v1.keras.models import load_model
 from .plot import (
     build_2d_grid, FeatureSpace, ProbabilityHistogram, LossHistogram, LossAndMetric, LayerViolins
